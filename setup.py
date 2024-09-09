@@ -6,34 +6,38 @@ See LICENCE.txt for licensing and contact information.
 
 from distutils.core import setup
 
-try:  # for pip >= 10
-    from pip._internal.req import parse_requirements
-except ImportError:  # for pip <= 9.0.3
-    from pip.req import parse_requirements
+#try:  # for pip >= 10
+#    from pip._internal.req import parse_requirements
+#except ImportError:  # for pip <= 9.0.3
+#    from pip.req import parse_requirements
 from runpy import run_path
 
-install_reqs = parse_requirements("requirements.txt", session=False)
-try:  # for pip < 20.1
-    install_requires = [str(ir.req) for ir in install_reqs]
-except AttributeError:  # for pip >= 20.1
-    install_requires = [str(ir.requirement) for ir in install_reqs]
+#install_reqs = parse_requirements("requirements.txt", session=False)
+#try:  # for pip < 20.1
+#    install_requires = [str(ir.req) for ir in install_reqs]
+#except AttributeError:  # for pip >= 20.1
+#    install_requires = [str(ir.requirement) for ir in install_reqs]
 
 
 def get_version():
-    namespace = run_path("chumpy/version.py")
+    namespace = run_path("chumpy_fork/version.py")
     return namespace["version"]
 
 
 setup(
-    name="chumpy",
+    name="chumpy_fork",
     version=get_version(),
-    packages=["chumpy"],
+    packages=["chumpy_fork"],
     author="Matthew Loper",
     author_email="matt.loper@gmail.com",
-    url="https://github.com/mattloper/chumpy",
-    description="chumpy",
+    url="https://github.com/var/chumpy",
+    description="chumpy fork, with latest python, pip and numpy support",
     license="MIT",
-    install_requires=install_requires,
+    install_requires=[
+        "numpy>=1.8.1",
+        "scipy>=0.13.0",
+        "six>=1.11.0",
+    ],
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         # How mature is this project? Common values are
